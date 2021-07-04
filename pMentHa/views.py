@@ -534,7 +534,7 @@ def contact(request):
         })
 
     else:
-        return render(request, 'pMentHa/contacts.html', {
+        return render(request, 'pMentHa/contact.html', {
         })
 
 def about(request):

@@ -24,6 +24,7 @@
         </div>
         <img class="img" src="{% static "pMentHa/images/mentha.png" %}" alt="velhotes"/>
     </header>
+    <h1 style="text-align: center;margin-top: 5%; color: darkslategrey;text-transform: uppercase">{{ test }}</h1>
     <div class="multiple">
         <h2 class="categoria">{{ question.category }}</h2>
         <form action="{% url 'fazPergunta' resolutionID question.id %}" method="POST" id="usrform">
@@ -57,11 +58,13 @@
                 }</script>
             {% endif %}
             <p>{{ order }}. {{ question.text }}</p>
-            <textarea name="resposta" rows="10" cols="30"></textarea>
-            <br>
+            <textarea name="resposta" rows="10" cols="30">{{ answer }}</textarea>
             <input class="testButton" type="submit" value="Próxima Pergunta">
             <p>{{ question.explain }}</p>
         </form>
+    <a href="{% url 'reportPrevQuestion' resolutionID question.id %}">
+            <button class="testButton2">Pergunta Anterior</button>
+        </a>
     </div>
     <br>
     <img class="promotores" src="{% static "pMentHa/images/promotores.png" %}"/>

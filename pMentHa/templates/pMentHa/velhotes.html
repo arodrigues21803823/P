@@ -1,0 +1,106 @@
+{% extends "pMentHa/base.html" %}
+{% load static %}
+{% block head %}
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            document.querySelector('form').onsubmit = function () {
+                fetch(`/api`)
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log(data[2]);
+                        const teste = document.querySelector("#teste").value;
+                        let patients = data[1];
+                        var table = document.getElementById("table_body");
+                        document.querySelector("#table_body").innerHTML = ` `
+                        for (let i = 0; i < data[teste].length; i++) {
+                            patients = data[teste][i]
+                            var row = table.insertRow(0);
+                            var cell1 = row.insertCell(0);
+                            var cell2 = row.insertCell(1);
+                            var cell3 = row.insertCell(2);
+                            var cell4 = row.insertCell(3)
+                            cell1.innerHTML = data[teste][i].name.toUpperCase();
+                            cell2.innerHTML = data[teste][i].gender.toUpperCase();
+                            cell3.innerHTML = data[teste][i].date.toUpperCase();
+                            cell4.innerHTML = data[teste][i].number;
+                        }
+                    });
+                return false;
+            }
+        });
+    </script>
+{% endblock %}
+{% block body %}
+<div class="grid-container">
+    <nav style="overflow:auto">
+        <div class="topmenu">
+            <a href="{% url 'index' %}"><i class="fa fa-fw fa-home"></i> Home</a>
+            <div class="dropdown">
+                <button class="dropbtn"><i class="fas fa-head-side-virus"></i> Projeto MentHa</button>
+                <div class="dropdown-content">
+                    {% if user.is_authenticated %}
+                        <a href="{% url 'patientoverview' %}">ProtocoloMentHa</a>
+                    {% else %}
+                        <a href="{% url 'login_' %}">ProtocoloMentHa</a>
+                    {% endif %}
+                    <a href="{% url 'mentha-care' %}"> MentHaCare</a>
+                    <a href="{% url 'velhotes' %}">Pesquisa de Pacientes</a>
+                </div>
+            </div>
+            {% if user.is_authenticated %}
+                <a href="{% url 'contactList' %}"><i class="fa fa-fw fa-envelope"></i> Contactos</a>
+            {% else %}
+                <a href="{% url 'contact' %}"><i class="fa fa-fw fa-envelope"></i> Contactos</a>
+            {% endif %}
+            <a href="{% url 'about' %}"><i class="fas fa-info-circle"></i> About</a>
+            <a href="{% url 'comments' %}"><i class="fas fa-comments"></i> Comentários</a>
+            <div class="top-right">
+                {% if user.is_authenticated %}
+                    <div class="dropdown">
+                        <button class="dropbtn">Bem vindo {{ user.username }}!</button>
+                        <div class="dropdown-content2">
+                            <a href="{% url 'logout_' %}"><i class="fas fa-sign-out-alt"></i>Logout</a>
+                        </div>
+                    </div>
+                {% else %}
+                    <a href="{% url 'login_' %}"><i class="fas fa-fingerprint"></i> Login</a>
+                {% endif %}
+            </div>
+        </div>
+        <figure>
+            <img class="img" src="{% static "pMentHa/images/mentha.png" %}" width="80%" alt="velhotes"/>
+        </figure>
+        <hr class="line">
+        {% if message %}
+            <div style="text-align: center;">
+            <span>
+                {{ message }}
+            </span>
+            </div>
+        {% endif %}
+    </nav>
+    <main>
+        <form>
+            <label for="teste">Introduza o número do teste:</label>
+            <input class="api_input" type="number" id="teste" min="1" max="5">
+            <input class="api_button" type="submit" value="Procurar">
+        </form>
+        <br>
+        <h2>Pacientes que realizaram o Teste:</h2>
+        <table id="myTable">
+            <thead>
+                <th>Paciente</th>
+                <th>Género</th>
+                <th>Data de Nascimento</th>
+                <th>Contacto</th>
+            </thead>
+            <tbody id="table_body">
+
+            </tbody>
+        </table>
+
+    </main>
+</div>
+{% endblock %}
+
+

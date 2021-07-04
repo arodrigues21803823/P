@@ -1,49 +1,141 @@
-{% extends "pMentHa/layout.html" %}
+{% extends "pMentHa/base.html" %}
 {% load static %}
 {% block body %}
-    <header>
-        <div class="topmenu">
-            <a  href="{% url 'index' %}"><i class="fa fa-fw fa-home"></i> Home</a>
-            <div class="dropdown">
-                <button class="dropbtn"><i class="fas fa-head-side-virus"></i> Projeto MentHa</button>
-                <div class="dropdown-content">
-                     {% if user.is_authenticated %}
-                        <a href="{% url 'patientoverview' %}">ProtocoloMentHa</a>
+    <div class="first-grid">
+        <nav style="overflow:auto">
+            <div class="topmenu">
+                <a href="{% url 'index' %}"><i class="fa fa-fw fa-home"></i> Home</a>
+                <div class="dropdown">
+                    <button class="dropbtn"><i class="fas fa-head-side-virus"></i> Projeto MentHa</button>
+                    <div class="dropdown-content">
+                        {% if user.is_authenticated %}
+                            <a href="{% url 'patientoverview' %}">ProtocoloMentHa</a>
+                        {% else %}
+                            <a href="{% url 'login_' %}">ProtocoloMentHa</a>
+                        {% endif %}
+                        <a class="active" href="{% url 'mentha-care' %}"> MentHaCare</a>
+                        <a href="{% url 'velhotes' %}">Pesquisa de Pacientes</a>
+                    </div>
+                </div>
+                <a href="{% url 'contact' %}"><i class="fa fa-fw fa-envelope"></i> Contactos</a>
+                <a href="{% url 'about' %}"><i class="fas fa-info-circle"></i> About</a>
+                <a href="{% url 'comments' %}"><i class="fas fa-comments"></i> Comentários</a>
+                <div class="top-right">
+                    {% if user.is_authenticated %}
+                        <div class="dropdown">
+                            <button class="dropbtn">Bem vindo {{ user.username }}!</button>
+                            <div class="dropdown-content2">
+                                <a href="{% url 'logout_' %}"><i class="fas fa-sign-out-alt"></i>Logout</a>
+                            </div>
+                        </div>
                     {% else %}
-                        <a href="{% url 'login_' %}">ProtocoloMentHa</a>
+                        <a href="{% url 'login_' %}"><i class="fas fa-fingerprint"></i> Login</a>
                     {% endif %}
-                    <a class="active" href="{% url 'mentha-care' %}"> MentHaCare</a>
-                    <a href="">MentHaCOG</a>
                 </div>
             </div>
-            <a href=""><i class="fa fa-fw fa-envelope"></i> Contactos</a>
-            <div class="top-right">
-                {% if user.is_authenticated %}
-                    <div class="dropdown">
-                        <button class="dropbtn">Bem vindo {{ user.username }}!</button>
-                        <div class="dropdown-content2">
-                            <a href="{% url 'logout_' %}"><i class="fas fa-sign-out-alt"></i>Logout</a>
-                        </div>
-                    </div>
-                {% else %}
-                    <a href="{% url 'login_' %}"><i class="fas fa-fingerprint"></i> Login</a>
-                {% endif %}
-            </div>
-        </div>
+            <figure>
+                <img class="img" src="{% static "pMentHa/images/mentha.png" %}" width="80%" alt="velhotes"/>
+            </figure>
+            <hr class="line">
+        </nav>
+        <main class="division">
+            <h2>MentHA-CARE</h2>
+            <p>O programa
+                MentHA-CARE concretiza uma intervenção psicoeducativa junto de
+                cuidadores informais de pessoas com doença mental.
+                Pretende-se promover o conhecimento acerca de algumas doenças mentais/crónicas
+                (ex. demência, perturbação bipolar, esquizofrenia, incapacidade intelectual,
+                epilepsia); explorar estratégias de comunicação e de gestão de comportamentos
+                desafiantes; promover boas práticas na prestação dos cuidados; conhecer os recursos
+                de apoio legais e da comunidade; explorar estratégias de gestão emocional e
+                de coping; incentivar o autocuidado dos CI e a valorização do papel de cuidador.</p>
+            <svg width="600" height="289">
+                <g transform="translate(50,100)">
+                    <a href="index.html">
+                        <text id="TextElement" x="0" y="0" style="font-size:18; visibility:hidden"> Home
+                            <set attributeName="visibility" attributeType="CSS" to="visible" begin="1s" dur="5s"
+                                 fill="freeze"/>
+                            <animateMotion path="M 4 0 L 100 89" begin="1s" dur="2s" fill="freeze"/>
+                            <animateTransform attributeName="transform" attributeType="XML" type="rotate" from="-30"
+                                              to="5" begin="1s" dur="5s" fill="freeze"/>
+                            <animateTransform attributeName="transform" attributeType="XML" type="scale" from="1" to="3"
+                                              additive="sum" begin="2s" dur="5s" fill="freeze"/>
+                        </text>
+                    </a>
 
-        <img class="img" src="{% static "pMentHa/images/mentha.png" %}" alt="velhotes"/>
-    </header>
-    <hr class="line">
-    <main class="division">
-        <h2>MentHA-CARE</h2>
-        <p>O programa
-            MentHA-CARE concretiza uma intervenção psicoeducativa junto de
-            cuidadores informais de pessoas com doença mental.
-            Pretende-se promover o conhecimento acerca de algumas doenças mentais/crónicas
-            (ex. demência, perturbação bipolar, esquizofrenia, incapacidade intelectual,
-            epilepsia); explorar estratégias de comunicação e de gestão de comportamentos
-            desafiantes; promover boas práticas na prestação dos cuidados; conhecer os recursos
-            de apoio legais e da comunidade; explorar estratégias de gestão emocional e
-            de coping; incentivar o autocuidado dos CI e a valorização do papel de cuidador.</p>
-    </main>
+                    <a href="{% url 'patientoverview' %}">
+                        <text id="TextElement" x="0" y="40" style="font-family:Verdana;font-size:12; visibility:hidden">
+                            Teste
+                            <set attributeName="visibility" attributeType="CSS" to="visible" begin="1s" dur="5s"
+                                 fill="freeze"/>
+                            <animateMotion path="M 0 0 L 50 100" begin="1s" dur="5s" fill="freeze"/>
+                            <animateTransform attributeName="transform" attributeType="XML" type="rotate" from="-30"
+                                              to="0" begin="1s" dur="5s" fill="freeze"/>
+                        </text>
+                    </a>
+
+                    <a href="{% url 'mentha-care' %}">
+                        <text id="TextElement2" x="100" y="30"
+                              style="font-family:Verdana;font-size:16; visibility:hidden"> MentHa Care
+                            <set attributeName="visibility" attributeType="CSS" to="visible" begin="1s" dur="5s"
+                                 fill="freeze"/>
+                            <animateMotion path="M 0 0 L 50 100" begin="1s" dur="5s" fill="freeze"/>
+                            <animateTransform attributeName="transform" attributeType="XML" type="rotate" from="-15"
+                                              to="0" begin="1s" dur="5s" fill="freeze"/>
+                        </text>
+                    </a>
+
+                    <a href="{% url 'about' %}">
+                        <text id="TextElement3" x="200" y="20"
+                              style="font-family:Verdana;font-size:14; visibility:hidden"> Sobre o Website
+                            <set attributeName="visibility" attributeType="CSS" to="visible" begin="1s" dur="5s"
+                                 fill="freeze"/>
+                            <animateMotion path="M 0 0 L 50 100" begin="1s" dur="5s" fill="freeze"/>
+                            <animateTransform attributeName="transform" attributeType="XML" type="rotate" from="-25"
+                                              to="360" begin="3s" dur="5s" fill="freeze"/>
+                        </text>
+                    </a>
+
+                    <a href="{% url 'login_' %}">
+                        <text id="TextElement3" x="200" y="-70"
+                              style="font-family:Impact;font-size:14; visibility:hidden"> Login
+                            <set attributeName="visibility" attributeType="CSS" to="visible" begin="1s" dur="5s"
+                                 fill="freeze"/>
+                            <animateMotion path="M 10 0 L 50 100" begin="1s" dur="5s" fill="freeze"/>
+                            <animateTransform attributeName="transform" attributeType="XML" type="rotate" from="-30"
+                                              to="0" begin="1s" dur="2s" fill="freeze"/>
+                        </text>
+                    </a>
+
+                    <a href="{% url 'register' %}">
+                        <text id="TextElement3" x="100" y="-80"
+                              style="font-family:Courier New;font-size:28; visibility:hidden"> Registar
+                            <set attributeName="visibility" attributeType="CSS" to="visible" begin="1s" dur="5s"
+                                 fill="freeze"/>
+                            <animateMotion path="M 10 0 L 50 100" begin="1s" dur="4s" fill="freeze"/>
+                            <animateTransform attributeName="transform" attributeType="XML" type="rotate" from="-30"
+                                              to="0" begin="1s" dur="5s" fill="freeze"/>
+                        </text>
+                    </a>
+                </g>
+            </svg>
+        </main>
+        <aside class="division">
+            <div class="relative">
+                <img src="{% static "pMentHa/images/cuida.jpg" %}" alt="cuido1" class="cuido1" width="80%">
+                <div class="absolute">
+                    <img src="{% static "pMentHa/images/cuida2.jpg" %}" alt="cuido2" class="cuido2" width="80%">
+                </div>
+            </div>
+        </aside>
+        <footer>
+            <div class="videoWrapper">
+                <iframe src="https://www.youtube.com/embed/IiwX7hSjjr8" title="YouTube video player" frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen></iframe>
+            </div>
+            <img class="promotores" src="{% static "pMentHa/images/promotores.png" %}" alt="promotores"/>
+        </footer>
+    </div>
 {% endblock %}
+

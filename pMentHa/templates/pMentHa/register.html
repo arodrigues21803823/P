@@ -1,4 +1,4 @@
-{% extends "pMentHa/layout.html" %}
+{% extends "pMentHa/base.html" %}
 {% load static %}
 {% block body %}
     <header>
@@ -12,7 +12,7 @@
                     <a href="">MentHaCOG</a>
                 </div>
             </div>
-            <a href=""><i class="fa fa-fw fa-envelope"></i> Contactos</a>
+            <a href="{% url 'contact' %}"><i class="fa fa-fw fa-envelope"></i> Contactos</a>
             <div class="top-right">
                 <a class="active" href="{% url 'login_' %}"><i class="fas fa-fingerprint"></i> Login</a>
             </div>

@@ -25,23 +25,55 @@
         </div>
         <img class="img" src="{% static "pMentHa/images/mentha.png" %}" alt="velhotes"/>
     </header>
+    <h1 style="text-align: center;margin-top: 5%; color: darkslategrey;text-transform: uppercase">{{ test }}</h1>
     <div class="multiple">
         <h2 class="categoria">{{ question.category }}</h2>
-        <form action="{% url 'fazPergunta' resolutionID question.id %}" method="POST">
+        <form action="{% url 'reportnextQuestion' resolutionID question.id %}" method="POST" id="usrform">
             {% csrf_token %}
+            {% if image %}
+                <img id="myImg" src="{% static image %}" alt="Snow" style="position:absolute;width:100%;max-width:100px;margin-left:35%;margin-top:-1%">
+                <div id="myModal" class="modal">
+                <span class="close">&times;</span>
+                <img class="modal-content" id="img01">
+                <div id="caption"></div>
+            </div>
+            <script>// Get the modal
+            var modal = document.getElementById("myModal");
+
+            // Get the image and insert it inside the modal - use its "alt" text as a caption
+            var img = document.getElementById("myImg");
+            var modalImg = document.getElementById("img01");
+            var captionText = document.getElementById("caption");
+            img.onclick = function () {
+                modal.style.display = "block";
+                modalImg.src = this.src;
+            }
+
+            // Get the <span> element that closes the modal
+            var span = document.getElementsByClassName("close")[0];
+
+            // When the user clicks on <span> (x), close the modal
+            span.onclick = function () {
+                modal.style.display = "none";
+            }</script>
+            {% endif %}
             <p>{{ order }}. {{ question.text }}</p>
             {% for option in options %}
                 {% if option.id == answer %}
-                    <label><input type="radio" name="resposta" value="{{option.id}}"checked>: {{ option.option }}</label>
-                {% else%}
-                    <label><input type="radio" name="resposta" value="{{option.id}}">: {{ option.option }}</label>
-               {% endif %}
+                    <label><input type="radio" name="resposta" value="{{ option.id }}" disabled checked>: {{ option.option }}
+                    </label>
+                {% else %}
+                    <label><input type="radio" name="resposta" value="{{ option.id }}"disabled>: {{ option.option }}</label>
+                {% endif %}
             {% endfor %}
             <br>
             <input class="testButton" type="submit" value="Próxima Pergunta">
-            <p>{{ question.explain }}</p>
-            <p>question.comments!!!!</p>
+            <br>
         </form>
-    anterior
+        <a href="{% url 'reportPrevQuestion' resolutionID question.id %}">
+            <button class="testButton2">Pergunta Anterior</button>
+        </a>
     </div>
+    <br>
+    <img class="promotores" src="{% static "pMentHa/images/promotores.png" %}"/>
 {% endblock %}

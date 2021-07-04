@@ -1,0 +1,154 @@
+{% extends "pMentHa/base.html" %}
+{% load static %}
+{% block body %}
+    <section class="grid-container">
+        <nav style="overflow:auto">
+            <div class="topmenu">
+                <a href="{% url 'index' %}"><i class="fa fa-fw fa-home"></i> Home</a>
+                <div class="dropdown">
+                    <button class="dropbtn"><i class="fas fa-head-side-virus"></i> Projeto MentHa</button>
+                    <div class="dropdown-content">
+                        {% if user.is_authenticated %}
+                            <a href="{% url 'patientoverview' %}">ProtocoloMentHa</a>
+                        {% else %}
+                            <a href="{% url 'login_' %}">ProtocoloMentHa</a>
+                        {% endif %}
+                        <a href="{% url 'mentha-care' %}"> MentHaCare</a>
+                        <a href="{% url 'velhotes' %}">Pesquisa de Pacientes</a>
+                    </div>
+                </div>
+                {% if user.is_authenticated %}
+                   <a href="{% url 'contactList' %}"><i class="fa fa-fw fa-envelope"></i> Contactos</a>
+                {% else %}
+                    <a href="{% url 'contact' %}"><i class="fa fa-fw fa-envelope"></i> Contactos</a>
+                {% endif %}
+                <a class="active" href="{% url 'about' %}"><i class="fas fa-info-circle"></i> About</a>
+                <a href="{% url 'comments' %}"><i class="fas fa-comments"></i> Comentários</a>
+                <div class="top-right">
+                    {% if user.is_authenticated %}
+                        <div class="dropdown">
+                            <button class="dropbtn">Bem vindo {{ user.username }}!</button>
+                            <div class="dropdown-content2">
+                                <a href="{% url 'logout_' %}"><i class="fas fa-sign-out-alt"></i>Logout</a>
+                            </div>
+                        </div>
+                    {% else %}
+                        <a href="{% url 'login_' %}"><i class="fas fa-fingerprint"></i> Login</a>
+                    {% endif %}
+                </div>
+            </div>
+            <figure>
+                <img class="img" src="{% static "pMentHa/images/mentha.png" %}" width="80%" alt="velhotes"/>
+            </figure>
+            <hr class="line">
+        </nav>
+        <main>
+            <h3 class="about-h2">Sobre o Website</h3>
+            <br>
+            <section>
+                <h4>Mapa do Website</h4>
+                <img class="about-image" src="{% static "pMentHa/images/mapa-website.PNG" %}" alt="website"/>
+            </section>
+            <hr class="line">
+            <br>
+            <section>
+                <h4>Layout PC vs Mobile</h4>
+                <h5 style="text-align: center;">Home & MentHa-Care</h5>
+                <img class="about-image" src="{% static "pMentHa/images/layout.PNG" %}" alt="layout"/>
+                <br>
+                <br>
+                <h5 style="text-align: center;">Restantes Páginas</h5>
+                <img class="about-image" src="{% static "pMentHa/images/layout-rest.PNG" %}" alt="layout-rest"/>
+            </section>
+            <hr class="line">
+            <br>
+            <section style="overflow-x:auto;">
+                <h4>Tecnicas Utilizadas</h4>
+                <table>
+                    <tr>
+                        <th style="width: 15%;">Características</th>
+                        <th style="width: 35%;">Técnicas</th>
+                        <th style="width: 50%;">Exemplos</th>
+                    </tr>
+                    <tr>
+                        <td>Layout</td>
+                        <td>CSS-Grid</td>
+                        <td>Serviu para organizar todas as páginas do Website</td>
+                    </tr>
+                    <tr>
+                        <td>Responsividade</td>
+                        <td>Media-Queries</td>
+                        <td>Nas páginas dividas em várias colunas, foi utilizado um media querie para
+                            que a disposição da página fosse num único bloco em ecrãs menores
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Seletores</td>
+                        <td>Seletores universais, de tipo, classe, identificador, atributos, pseudo-classe,
+                            pseudo-elemento
+                        </td>
+                        <td>".col-middle", ".about.table"...</td>
+                    </tr>
+                    <tr>
+                        <td>Etiquetas</td>
+                        <td>HTML5 html, main, nav, article, footer, figure, body, nav, input,ul,li,a,details,p,h,table,
+                            figcaption, section, tr, td, form...
+                        </td>
+                        <td>A etiqueta nav respresentada no topo de cada página do Website</td>
+                    </tr>
+                    <tr>
+                        <td>Animações</td>
+                        <td>Keyframes</td>
+                        <td>Keyframe utilizado no final desta página para mover dinâmicamente a tabela</td>
+                    </tr>
+                    <tr>
+                        <td>Icons</td>
+                        <td>"Shortcut Icon"</td>
+                        <td>Utilizados no para definir o logo no separador web</td>
+                    </tr>
+                </table>
+            </section>
+            <br>
+            <hr class="line">
+            <section class="videoWrapper">
+                <h4>Video de Apresentação ao Website</h4>
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/77YVF8zQUyI"
+                        title="YouTube video player" frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen></iframe>
+            </section>
+            <hr class="line">
+            <br>
+            <br>
+            <section class="about-table" style="overflow-x:auto;">
+                <h4>Tabela de Inventário</h4>
+                <table>
+                    <tr>
+                        <th>Elementos</th>
+                        <th>Utilizações</th>
+                    </tr>
+                    <tr>
+                        <td>Animações</td>
+                        <td>2</td>
+                    </tr>
+                    <tr>
+                        <td>Páginas</td>
+                        <td>10</td>
+                    </tr>
+                    <tr>
+                        <td>Imagens</td>
+                        <td>8</td>
+                    </tr>
+                    <tr>
+                        <td>Links</td>
+                        <td>2</td>
+                    </tr>
+                    <tr>
+                        <td>Vídeos</td>
+                        <td>1</td>
+                    </tr>
+                </table>
+            </section>
+        </main>
+    </section>
+{% endblock %}

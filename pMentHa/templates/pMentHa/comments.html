@@ -1,0 +1,103 @@
+{% extends "pMentHa/base.html" %}
+{% load static %}
+{% block body %}
+    <div class="first-grid">
+        <nav style="overflow:auto">
+            <div class="topmenu">
+                <a href="{% url 'index' %}"><i class="fa fa-fw fa-home"></i> Home</a>
+                <div class="dropdown">
+                    <button class="dropbtn"><i class="fas fa-head-side-virus"></i> Projeto MentHa</button>
+                    <div class="dropdown-content">
+                        {% if user.is_authenticated %}
+                            <a href="{% url 'patientoverview' %}">ProtocoloMentHa</a>
+                        {% else %}
+                            <a href="{% url 'login_' %}">ProtocoloMentHa</a>
+                        {% endif %}
+                        <a href="{% url 'mentha-care' %}"> MentHaCare</a>
+                        <a href="{% url 'velhotes' %}">Pesquisa de Pacientes</a>
+                    </div>
+                </div>
+                {% if user.is_authenticated %}
+                    <a href="{% url 'contactList' %}"><i class="fa fa-fw fa-envelope"></i> Contactos</a>
+                {% else %}
+                    <a href="{% url 'contact' %}"><i class="fa fa-fw fa-envelope"></i> Contactos</a>
+                {% endif %}
+                <a href="{% url 'about' %}"><i class="fas fa-info-circle"></i> About</a>
+                <a class="active" href="{% url 'comments' %}"><i class="fas fa-comments"></i> Comentários</a>
+                <div class="top-right">
+                    {% if user.is_authenticated %}
+                        <div class="dropdown">
+                            <button class="dropbtn">Bem vindo {{ user.username }}!</button>
+                            <div class="dropdown-content2">
+                                <a href="{% url 'logout_' %}"><i class="fas fa-sign-out-alt"></i>Logout</a>
+                            </div>
+                        </div>
+                    {% else %}
+                        <a href="{% url 'login_' %}"><i class="fas fa-fingerprint"></i> Login</a>
+                    {% endif %}
+                </div>
+            </div>
+            <figure>
+                <img class="img" src="{% static "pMentHa/images/mentha.png" %}" alt="velhotes"/>
+            </figure>
+            <hr class="line">
+        </nav>
+        <main>
+            <h2 class = "h2_comment">Comentários</h2>
+            <br>
+            <div class="form_container">
+                <form action="{% url 'comments' %}" method="POST">
+                    {% csrf_token %}
+                    <p>Conseguiu facilmente aceder aos menus pretendidos?</p>
+                    <input type="radio" id="zero" name="clareza" value=0>
+                    <label for="zero">0</label>
+                    <input type="radio" id="um" name="clareza" value=1>
+                    <label for="um">1</label>
+                    <input type="radio" id="dois" name="clareza" value=2>
+                    <label for="dois">2</label>
+                    <input type="radio" id="tres" name="clareza" value=3>
+                    <label for="tres">3</label>
+                    <input type="radio" id="quatro" name="clareza" value=4>
+                    <label for="quatro">4</label>
+                    <input type="radio" id="cinco" name="clareza" value=5>
+                    <label for="cinco">5</label><br><br><br><br>
+                    <label for="vol">Num intervalo de 1 a 10, o que achou da pertinência do Website?:</label>
+                    <br>
+                    <br>
+                    <input name="pertinencia" id="pertinencia" type="range" min="0" max=10 value="0">
+                    <output for="pertinencia" name="pertinencia">0</output>
+                    /10
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <label for="name">Diga a curiosidade mais interessante que aprendeu sobre o Protocolo MentHa:</label>
+                    <br>
+                    <br>
+                    <input type="text" id="curiosidade" name="curiosidade"><br><br><br><br>
+
+                    <p>Sentiu que esta página o ajudou a descobrir coisas novas sobre a assistência a idosos?</p>
+                    <input type="checkbox" id="id" name="help" value="Sim">
+                    <label for="id">Sim</label><br>
+                    <input type="checkbox" id="id" name="help" value="Não">
+                    <label for="id"> Não</label><br><br><br>
+                    <p>Achou este Website criativo e original?</p>
+                    <input type="checkbox" id="id" name="original" value="Sim">
+                    <label for="id">Sim</label><br>
+                    <input type="checkbox" id="id" name="original" value="Não">
+                    <label for="id">Não</label><br>
+                    <input type="checkbox" id="id" name="original" value="No Answer">
+                    <label for="id">Prefiro não responder</label><br><br><br><br>
+
+
+                    <label for="area">Escreva os pontos mais importantes a melhorar: </label><br><br>
+                    <textarea id="area" rows="10" cols="92" placeholder="Melhoraria o index visto...."></textarea>
+                    <br>
+                    <br>
+                    <br>
+                    <input class="comment_button" type="submit" value="Submeter Formulário">
+                </form>
+            </div>
+        </main>
+    </div>
+{% endblock %}

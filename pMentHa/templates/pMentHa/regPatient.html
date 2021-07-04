@@ -1,4 +1,4 @@
-{% extends "pMentHa/layout.html" %}
+{% extends "pMentHa/base.html" %}
 {% load static %}
 {% block body %}
     <header>
@@ -12,7 +12,7 @@
                     <a href="">MentHaCOG</a>
                 </div>
             </div>
-            <a href=""><i class="fa fa-fw fa-envelope"></i> Contactos</a>
+            <a href="{% url 'contact' %}"><i class="fa fa-fw fa-envelope"></i> Contactos</a>
             <div class="top-right">
                 {% if user.is_authenticated %}
                     <div class="dropdown">
@@ -48,22 +48,24 @@
                     <input class="pat" type="text" id="email" name="email">
 
                     <label class="left" for="gender">Género</label>
-                    <select id="gender" name="gender">
+                    <select class="regForm" id="gender" name="gender">
                         <option value="masculino">Masculino</option>
                         <option value="feminino">Feminino</option>
                         <option value="outro">Outro</option>
                     </select>
 
                     <label class="left" for="nacionality">Nacionalidade</label>
-                    <select id="nacionality" name="nacionality">
+                    <select class="regForm" id="nacionality" name="nacionality">
                         <option value="portugal">Portugal</option>
                         <option value="espanha">Espanha</option>
+                        <option value="espanha">França</option>
+                        <option value="espanha">Alemanha</option>
                         <option value="outro">Outro</option>
                     </select>
                 </div>
                 <div class="col-middle">
                     <label class="left" for="date">Data de Nascimento:</label>
-                    <input type="date" id="date" name="date">
+                    <input class="pat" type="date" id="date" name="date">
 
                     <label class="left" for="disease">Doença degenerativa identificada?</label>
                     <input class="pat" type="text" id="disease" name="disease">
@@ -72,7 +74,7 @@
                     <input class="pat" type="text" id="disexase2" name="disease2">
 
                     <label class="left" for="number">Contacto</label>
-                    <input type="number" id="number" name="number">
+                    <input class="pat" type="number" id="number" name="number">
                 </div>
                 <div class="col-right">
                     <a href="{% url 'patientoverview' %}">

@@ -14,10 +14,16 @@
                             <a href="{% url 'login_' %}">ProtocoloMentHa</a>
                         {% endif %}
                         <a href="{% url 'mentha-care' %}"> MentHaCare</a>
-                        <a href="">MentHaCOG</a>
+                        <a href="{% url 'velhotes' %}">Pesquisa de Pacientes</a>
                     </div>
                 </div>
-                <a href="{% url 'contact' %}"><i class="fa fa-fw fa-envelope"></i> Contactos</a>
+                {% if user.is_authenticated %}
+                   <a href="{% url 'contactList' %}"><i class="fa fa-fw fa-envelope"></i> Contactos</a>
+                {% else %}
+                    <a href="{% url 'contact' %}"><i class="fa fa-fw fa-envelope"></i> Contactos</a>
+                {% endif %}
+                <a href="{% url 'about' %}"><i class="fas fa-info-circle"></i> About</a>
+                <a href="{% url 'comments' %}"><i class="fas fa-comments"></i> Comentários</a>
                 <div class="top-right">
                     {% if user.is_authenticated %}
                         <div class="dropdown">
@@ -44,29 +50,26 @@
             {% endif %}
         </nav>
         <main>
-            <div class="wrapper">
-                <div id="formContent">
-                    <h4 class="activeH2"> Precisa de Ajuda? </h4>
-                    {% if message %}
-                        <p>{{ message }}</p>
-                    {% endif %}
-                    <form action="{% url 'contact' %}" method="POST">
-                        {% csrf_token %}
-                        <label class="contact" for="fname">E-mail:</label>
-                        <br>
-                        <input class="login_text" type="email" id="email" name="email" placeholder="example@example.pt">
-                        <label class="contact" for="fname">Nome:</label>
-                        <br>
-                        <input class="login_text" type="name" id="name" name="name" placeholder="João Maria">
-                        <label class="contact" for="fname">Contacto:</label>
-                        <br>
-                        <input class="login_text" type="number" id="contact" name="contact" placeholder="+351 9XX XXX XXX ">
-                        <label class="contact" for="date">Data de Nascimento:</label>
-                        <br>
-                        <input class="login_text" type="date" id="date" name="date">
-                        <input class="but" type="submit" value="Enviar">
-                    </form>
-                </div>
+            <div style="overflow-x:auto;">
+                <h2 class="h2_po">Contacto de Pacientes</h2>
+                <table>
+                    <tr>
+                        <th>Nome</th>
+                        <th>E-mail</th>
+                        <th>Data Nascimento</th>
+                        <th>Contacto</th>
+                        <th>Apagar</th>
+                    </tr>
+                    {% for atribute in contact %}
+                        <tr>
+                            <td>{{ atribute.name }}</td>
+                            <td>{{ atribute.email }}</td>
+                            <td>{{ atribute.birth }}</td>
+                            <td>{{ atribute.contact }}</td>
+                            <td><a href="{% url 'apaga-view' atribute.id %}"><i class="far fa-trash-alt"></i></a></td>
+                        </tr>
+                    {% endfor %}
+                </table>
             </div>
         </main>
     </div>
